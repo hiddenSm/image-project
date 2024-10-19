@@ -1,0 +1,30 @@
+# Ignore Python cache and virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore Git
+.git/
+.gitignore
+
+# Ignore local development artifacts
+*.swp
+*.swo
+
+# Ignore static files
+staticfiles/
+
+# Ignore media uploads (if you have media files)
+media/
+
+# Ignore Docker files
+Dockerfile
+docker-compose.yml

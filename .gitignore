@@ -1,0 +1,11 @@
+ignores.py
+db.sqlite3
+images/seralizers.py
+
+
+imageproject/__pycache__/
+images/__pycache__/
+media/
+venv/
+cache/
+staticfiles/

@@ -1,0 +1,110 @@
+version: '3.8'
+
+services:
+  mypostgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - my_network
+      
+  django-app: # image-project
+    build: .
+    image: python:3.11
+    working_dir: /app 
+    command: sh -c "python wait_for_db.py && python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --bind 0.0.0.0:8000 imageproject.wsgi:application"
+    # command: >
+    #   sh -c "python wait_for_db.py && \
+    #   python manage.py makemigrations && \
+    #   python manage.py migrate && \
+    #   python manage.py collectstatic --noinput && \
+    #   gunicorn --bind 0.0.0.0:8000 imageproject.wsgi:application"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - myredis
+      - mypostgres
+    networks:
+      - my_network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./staticfiles:/app/staticfiles  
+    depends_on:
+      - django-app
+    networks:
+      - my_network
+
+  myredis:
+    image: redis:latest
+    networks:
+      - my_network
+
+volumes:
+  pgdata:
+
+networks:
+  my_network:
+
+########################################################
+# version: '3.8'
+
+# services:
+#   mypostgres:
+#     image: postgres:latest
+#     environment:
+#       POSTGRES_DB: testdb
+#       POSTGRES_USER: root
+#       POSTGRES_PASSWORD: 1234
+#     volumes:
+#       - pgdata:/var/lib/postgresql/data
+#     networks:
+#       - my_network
+      
+#   django-app: # image-project
+#     image: python:3.11
+#     build: .
+#       # context: . 
+#     working_dir: /app # pip install -r /app/requirements.txt &&
+#     # command: sh -c "pip install --upgrade pip &&  python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --bind 0.0.0.0:8000 imageproject.wsgi:application"
+#     command: sh -c "python wait_for_db.py && python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --bind 0.0.0.0:8000 imageproject.wsgi:application"
+#     # volumes:
+#       # - ./:/app
+#     ports:
+#       - "8000:8000"
+#     depends_on:
+#       - myredis
+#       - mypostgres
+#     networks:
+#       - my_network
+
+#   nginx:
+#     image: nginx:latest
+#     ports:
+#       - "80:80"
+#     volumes:
+#       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+#       - ./staticfiles:/app/staticfiles  
+#     depends_on:
+#       - django-app
+#     networks:
+#       - my_network
+
+#   myredis:
+#     image: redis:latest
+#     networks:
+#       - my_network
+
+# volumes:
+#   pgdata:
+
+# networks:
+#   my_network:
