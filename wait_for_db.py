@@ -11,7 +11,7 @@ def wait_for_db():
                 user="root",
                 password="1234",
                 host="mypostgres",
-                port="5432"
+                port="5432" # env.port
             )
             conn.close()
             break

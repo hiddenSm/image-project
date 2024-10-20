@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+# from decouple import config
 
 import sentry_sdk
 
@@ -158,3 +159,8 @@ sentry_sdk.init(
 
     traces_sample_rate=1.0,
 )
+
+# DATABASE_NAME = config('DATABASE_NAME')
+# DATABASE_NAME = config('DATABASE_NAME')
+# DATABASE_NAME = config('DATABASE_NAME')
+# DATABASE_NAME = config('DATABASE_NAME')

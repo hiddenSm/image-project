@@ -1,7 +1,7 @@
 ignores.py
 db.sqlite3
 images/seralizers.py
-
+.env
 
 imageproject/__pycache__/
 images/__pycache__/
