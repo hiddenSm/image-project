@@ -32,7 +32,6 @@ def show_image(image_uuid):
 
     return image_path, image_format
 
-
 def get_image(image_uuid, message_uuid=None, user_uuid=None):
     if message_uuid:
         cache_key = [image_uuid, message_uuid]
@@ -65,6 +64,7 @@ def add_log(request, picture: Picture, image_uuid, message_uuid=None, user_uuid=
             # time=self.data.get('time')
         )
         return user_info
+
 
         # data = {
         #     'user_agent': request.META.get('HTTP_USER_AGENT', ''),
