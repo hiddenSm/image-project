@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 
 import sentry_sdk
 
@@ -21,14 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
+## can put info of this in the .env too !!
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-&1p24y*9sezso*qy^d6&b313!t()!8o&0iy_ffeu_n$=_50&kv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['172.16.2.10', 'image.piapi.ir', '127.0.0.1', 'localhost', '0.0.0.0']
-CSRF_TRUSTED_ORIGINS = ['https://image.piapi.ir']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0']
+# ALLOWED_HOSTS = config('')
+# CSRF_TRUSTED_ORIGINS = config('')
 
 # Application definition
 
@@ -86,11 +90,11 @@ WSGI_APPLICATION = 'imageproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'testdb',
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': 'mypostgres', # for docker-compose it should be the name of the db container in docker (here is mypostgres)
-        'PORT': '5432',
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'), # for docker-compose it should be the name of the db container in docker (here is mypostgres)
+        'PORT': config('DATABASE_PORT'),
     }
 }
 
@@ -130,18 +134,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+
+## can put info of this in the .env too !!
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+## can put info of this in the .env too !!
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+## can put info of this in the .env too !!
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -152,8 +163,8 @@ CACHES = {
     }
 }
 
+## can put info of this in the .env too !!
 sentry_sdk.init(
-    # dsn="https://06ea5082b9c56953d59b3d7098309336@sentry.piapi.ir/3",
     dsn="https://f7baa1e53bd766295099648485bd73e9@o4508149683585024.ingest.us.sentry.io/4508149684961280",
 
     traces_sample_rate=1.0,

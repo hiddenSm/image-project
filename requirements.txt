@@ -6,9 +6,11 @@ gunicorn==23.0.0
 packaging==24.1
 pillow==10.4.0
 psycopg2-binary==2.9.9
+python-decouple==3.8
 redis==5.0.8
 sentry-sdk==2.15.0
 sqlparse==0.5.1
 urllib3==2.2.3
 # micropython-imghdr
 # psycopg
+# decouple==0.0.7
