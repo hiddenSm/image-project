@@ -1,17 +1,16 @@
-# wait_for_db.py
 import time
-import psycopg2
 from psycopg2 import OperationalError
+from decouple import config
 
 def wait_for_db():
     while True:
         try:
             conn = psycopg2.connect(
-                dbname="testdb",
-                user="root",
-                password="1234",
-                host="mypostgres",
-                port="5432" # env.port
+                dbname=config('DATABASE_NAME'),
+                user=config('DATABASE_USER'),
+                password=config('DATABASE_PASSWORD'),
+                host=config('DATABASE_HOST'),
+                port=config('DATABASE_PORT')
             )
             conn.close()
             break

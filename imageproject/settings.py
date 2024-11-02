@@ -24,15 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 ## can put info of this in the .env too !!
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&1p24y*9sezso*qy^d6&b313!t()!8o&0iy_ffeu_n$=_50&kv'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0']
-# ALLOWED_HOSTS = config('')
-# CSRF_TRUSTED_ORIGINS = config('')
+
 
 # Application definition
 
@@ -93,7 +91,7 @@ DATABASES = {
         'NAME': config('DATABASE_NAME'),
         'USER': config('DATABASE_USER'),
         'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': config('DATABASE_HOST'), # for docker-compose it should be the name of the db container in docker (here is mypostgres)
+        'HOST': config('DATABASE_HOST'),
         'PORT': config('DATABASE_PORT'),
     }
 }
@@ -135,7 +133,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 
-## can put info of this in the .env too !!
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -147,25 +144,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-## can put info of this in the .env too !!
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-## can put info of this in the .env too !!
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://myredis:6379/1',  # Redis connection URL
+        'LOCATION': config('LOCATION'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
 }
 
-## can put info of this in the .env too !!
 sentry_sdk.init(
-    dsn="https://f7baa1e53bd766295099648485bd73e9@o4508149683585024.ingest.us.sentry.io/4508149684961280",
-
+    dsn=config('DSN'),
     traces_sample_rate=1.0,
 )

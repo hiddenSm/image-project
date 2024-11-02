@@ -44,6 +44,26 @@ git clone https://github.com/hiddenSm/image-project.git
 cd image-project
 ```
 
+### Environment Variables <br />
+```
+## Django settings
+DEBUG=False
+SECRET_KEY=your_secret_key
+
+## Database settings
+DATABASE_NAME=your-db-name
+DATABASE_USER=your-db-user
+DATABASE_PASSWORD=your-db-password
+DATABASE_HOST=your-db-host
+DATABASE_PORT=your-db-port
+
+## cache-redis
+LOCATION=your-redis-location
+
+## sentry
+DSN=your-sentry-dsn (if you have)
+```
+
 Build and start the containers: <br />
 ```
 docker-compose up --build
