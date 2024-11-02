@@ -2,7 +2,7 @@
 
 ## Description
 
-The **Image Project** is a Django-based web application designed for efficient image management and retrieval. Its primary goal is to assist companies that send advertising or any other type of emails to users by enabling the technical team to understand which emails were opened by which users.
+The **Image Project** is a Django-based web application. Its primary goal is to assist companies that send advertising or any other type of emails to users by enabling the technical team to understand which emails were opened by which users.
 
 ### How It Works
 
@@ -13,8 +13,8 @@ The **Image Project** is a Django-based web application designed for efficient i
 <details>
 <summary><strong>Key Features</strong></summary>
 
-- **Image Upload**: Users can upload images that are stored securely with unique identifiers (UUIDs).
-- **Dynamic Loading**: Images are served through a dedicated view that handles various URL formats and logging.
+- **Image Upload**: administrators can upload images that are stored with unique identifiers (UUIDs).
+- **Dynamic Loading**: Images are served through a dedicated view that handles various URL formats.
 - **User Logging**: Each image access logs user details (such as IP address and user agent) to track interactions with email content.
 - **Throttling**: The application implements request throttling to prevent abuse and manage server load effectively.
 - **Caching**: Cached image data enhances performance by reducing database queries and speeding up retrieval.
