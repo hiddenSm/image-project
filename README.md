@@ -45,6 +45,8 @@ cd image-project
 ```
 
 ### Environment Variables <br />
+create an `.env` file next to the project Dockerfile, and add these to it:
+
 ```
 ## Django settings
 DEBUG=False
